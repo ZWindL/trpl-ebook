@@ -25,7 +25,7 @@ struct Chapter {
 fn get_chapters(toc: &str) -> Vec<Chapter> {
     let toc_pattern = Regex::new(r"(?x)
         (?P<indent>\s*?)
-        \*\s
+        -\s
         \[
         (?P<title>.+?)
         \]
@@ -94,7 +94,7 @@ pub fn to_single_file(src_path: &Path, meta: &str) -> Result<String, Box<Error>>
         let file = try!(file::get_file_content(&src_path.join(&chapter.file)));
 
         let mut content = try!(adjust_header_level::adjust_header_level(&file, 3));
-        content = try!(remove_file_title::remove_file_title(&content));
+        //content = try!(remove_file_title::remove_file_title(&content));
         content = try!(adjust_reference_names::adjust_reference_name(&content, &chapter.file));
         content = try!(normalize::normalize(&content));
 
